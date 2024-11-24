@@ -2,7 +2,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useWatchlist } from '../../hooks/useWatchlist';
 import { useTokens } from '../../hooks/useTokens';
 import { TokenCard } from './TokenCard';
-import { Token } from '@/types/tokenTypes';
+import { WatchlistToken } from '@/types/tokenTypes';
 
 export const TokenList = () => {
   const { user } = useAuth();
@@ -15,7 +15,7 @@ export const TokenList = () => {
   if (isTokensLoading || isWatchlistLoading) return <div>Loading...</div>;
   if (tokensError instanceof Error) return <div>Error: {tokensError.message}</div>;
 
-  const watchlistTokenIds = new Set(watchlist.map((item: Token) => item.id));
+  const watchlistTokenIds = new Set(watchlist.map((item: WatchlistToken) => item.tokenId));
 
   return (
     <div className="container mx-auto p-4">
