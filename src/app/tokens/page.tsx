@@ -2,10 +2,10 @@
 
 import { TokenList } from "@/components/Token/TokenList";
 
-export default function Home() {
+export default function TokensPage() {
   return (
-    <div>
+    <div className="container mx-auto p-4">
         <TokenList />
-     </div>
+    </div>
   );
 }
