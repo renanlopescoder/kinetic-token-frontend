@@ -14,18 +14,18 @@ export default function LoginModal({
 }: LoginModalProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth(); 
+  const { login } = useAuth();
   const [error, setError] = useState('');
 
   const handleLogin = async () => {
-    setError(''); 
+    setError('');
     try {
       await login.mutateAsync({ email, password });
       setEmail('');
       setPassword('');
       onClose();
     } catch (err: any) {
-      setError(err.message || 'Login failed'); 
+      setError(err.message || 'Login failed');
     }
   };
 
@@ -33,13 +33,18 @@ export default function LoginModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-      <div className="flex justify-center mb-4">
-          <img
-            src="kinetic.jpg"
-            alt="Kinetic Logo"
-            className="h-12 w-auto"
-          />
+      <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-black rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-300"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+
+        <div className="flex justify-center mb-4">
+          <img src="kinetic.jpg" alt="Kinetic Logo" className="h-12 w-auto" />
         </div>
         <h2 className="text-black text-xl font-bold mb-4 text-center">Login</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
