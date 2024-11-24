@@ -1,3 +1,5 @@
+import { useAuth } from "@/hooks/useAuth";
+
 interface TokenCardProps {
   token: {
     id: string;
@@ -13,6 +15,8 @@ interface TokenCardProps {
 }
 
 export const TokenCard = ({ token, isInWatchlist, onAddToWatchlist }: TokenCardProps) => {
+  const { user } = useAuth();
+
   return (
     <div className="p-6 border rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow duration-300 relative">
 
@@ -47,6 +51,7 @@ export const TokenCard = ({ token, isInWatchlist, onAddToWatchlist }: TokenCardP
           <strong>24h Change:</strong> {token.price_change_percentage_24h.toFixed(2)}%
         </p>
       </div>
+      {user && 
       <button
         className="w-full bg-violet-600 hover:bg-violet-800 text-white py-2 px-4 rounded transition-colors duration-300 disabled:bg-gray-300"
         onClick={onAddToWatchlist}
@@ -54,6 +59,7 @@ export const TokenCard = ({ token, isInWatchlist, onAddToWatchlist }: TokenCardP
       >
         {isInWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
       </button>
+      }
       <a
         href={`https://www.coingecko.com/en/coins/${token.id}`}
         target="_blank"
